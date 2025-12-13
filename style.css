@@ -12,15 +12,26 @@ body {
     
 }
 
-
+/*screen for the pixel hehe */
 .screen {
     width: 260px;
     height: 260px;
     margin: 10px auto 20px;
     background-color: rgba(194, 211, 180, 0.589);
+    border-radius: 1%;
     
     justify-content: center;
     position: relative;
     overflow: hidden;
     
+}
+
+/*button styling */
+.controls {
+    color: white;
+
+    
+    justify-content: space-between;
+    padding: 2%;
+    display: flex. 15%;
 }
