@@ -8,7 +8,7 @@ body {
     justify-content: center;
 
     background-color: rgb(255, 255, 255);
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family: 'Shizuru', cursive;
     
 }
 
@@ -59,12 +59,18 @@ body {
 }
 
 
+.hidden { display: none; }
 
 /*hiding statistics from users*/
 .stats {
   display: none;
+
+
 }
 
+.gamestats {
+    display: none;
+  }
 
 /*button styling*/
 .controls {
@@ -106,4 +112,22 @@ body {
 
 .controls img:hover {
   background: rgb(179, 183, 201);
+}
+
+.gamebuttons button,
+#btnExitGame {
+  display:block;
+
+  border: 1px dotted #000;
+  background: #fff;
+
+  border-radius: 6px;
+  padding: 8px 50px;
+  font-family: 'Courier New', Courier, monospace;
+
+}
+
+.gamebuttons button:hover,
+#btnExitGame:hover {
+  background: #e6e6e6;
 }

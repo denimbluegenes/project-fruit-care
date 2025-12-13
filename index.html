@@ -1,38 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tama-Fruit</title>
-    <link rel="stylesheet" href="styles.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Tama-Fruit</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link
+  href="https://fonts.googleapis.com/css2?family=Shizuru&display=swap"
+  rel="stylesheet"/>
 </head>
+
 <body>
-    <h1>My Tama-Fruit</h1>
+  <h1>My Tama-Fruit</h1>
 
-    <!-- screen size for pixel pet -->
- <div class="screen" id="screen">
-    <img id="pet" class="pet" src="images/baby/baby.gif" alt="My Tama-Fruit">
+  <!-- PET VIEW -->
+  <div id="petView">
+    <div class="screen" id="screen">
+      <img id="pet" class="pet" src="images/baby/baby.gif" alt="My Tama-Fruit" />
+    </div>
+
+    <div class="stats">
+      <div>Hunger: <span id="hunger">5</span></div>
+      <div>Happiness: <span id="happiness">5</span></div>
+      <div>Potty: <span id="potty">0</span></div>
+    </div>
+
+    <div class="controls">
+      <button id="btnEat" type="button">
+        <img src="images/icons/feed.png" alt="feed" />
+      </button>
+
+      <button id="btnPlay" type="button">
+        <img src="images/icons/play.png" alt="play" />
+      </button>
+    </div>
+  </div>
+
+  <!-- GAME VIEW -->
+  <div id="gameView" class="hidden">
+    <h2>High Card or Low Card?</h2>
+
+    <div class="screen">
+      <div id="currentNum" style="font-size:64px;font-weight:700;">?</div>
+    </div>
+
+    <div class="gamestats">
+        <div id="gameMsg">Higher or Lower?</div>
+        <div id="winInfo"></div>
+    </div>
+
+    <div id="roundInfo"></div>
+<div class="gamebuttons">
+    <div style="display:flex; justify-content:center; gap:12px; margin-top:12px;">
+      <button id="btnLower" type="button">Lower</button>
+      <button id="btnHigher" type="button">Higher</button>
+    </div>
+
+    <button id="btnExitGame" type="button" style="margin-top:16px;">Exit</button>
+  </div>
 </div>
-
-  
-    <!-- statistics for how much hunger and others blah blah (maybe ill keep) -->
-<div class="stats">
-        <div>Hunger: <span id="hunger">5</span></div>
-        <div>Happiness: <span id="happiness">5</span></div>
-        <div>Potty: <span id="potty">0</span></div>
-</div>
-    <!-- buttons/interactions -->
-<div class="controls">
-    <button id="btnEat" type="button">
-        <img src="images/icons/feed.png" alt="feed">
-    </button>
-    </button>
-    <button id="btnPlay" type="button"></button>
-        <img src="images/icons/play.png" alt="play">
-    </button>
-</div>
-
-<script src="main.js"></script>
-
+  <script src="main.js"></script>
 </body>
 </html>
