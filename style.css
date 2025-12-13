@@ -13,25 +13,82 @@ body {
 }
 
 /*screen for the pixel hehe */
-.screen {
+.screen{
     width: 260px;
     height: 260px;
     margin: 10px auto 20px;
     background-color: rgba(194, 211, 180, 0.589);
     border-radius: 1%;
     
+    display: flex;
     justify-content: center;
+    align-items: center;
+
     position: relative;
     overflow: hidden;
     
 }
+
+/*the baby */
+.pet {
+  width: 15px;
+  height: 15px;
+
+  image-rendering: pixelated;
+
+  transform: scale(6) translateY(3px);
+  transform-origin: center center;
+
+  margin: 0;
+  position: relative;
+
+}
+
+
+/*hiding statistics from users */
+.stats {
+  display: none;
+}
+
 
 /*button styling */
 .controls {
     color: white;
 
     
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     padding: 2%;
-    display: flex, 15%;
+    display: flex;
+    
+
+}
+
+.controls button {
+    background: none;
+    cursor:pointer;
+
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border: none;
+    
+}
+
+.controls img {
+    width: 32px;
+    height: 32px;
+    display: block;
+    cursor:pointer;
+    background: rgb(255, 255, 255);
+
+    border: 2px solid rgba(78, 87, 71, 0.589);
+    border-radius: 5%;
+    padding: 5px;
+
+    
+}
+
+.controls img:hover {
+  background: rgb(179, 183, 201);
 }
