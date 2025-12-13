@@ -9,23 +9,35 @@ function playButtonSound() {
 }
 
 /*makes the images makes noise :3 */
+document.querySelectorAll(".controls img").forEach((btn) => {
+  btn.addEventListener("click", playButtonSound);
+});
+
 
 const pet = document.getElementById("pet");
-const feedIcon = document.getElementById("feedIcon");
+const btnEat = document.getElementById("btnEat");
+const eatSound = new Audio("sounds/eating.wav");
+eatSound.volume = 0.4;
 
-feedIcon.addEventListener("click", (e) => {
-  e.preventDefault();
+// start wandering
+pet.classList.add("wandering");
 
-  // stop wandering
+btnEat.addEventListener("click", () => {
+  // stop walking, start eating
   pet.classList.remove("wandering");
-  pet.style.animation = "none";
+  pet.classList.add("eating");
 
-  // play eat gif (restart every time)
-  pet.src = "images/baby/babyfeed.gif?" + Date.now();
+  // play eating gif
+  pet.src = "images/baby/babyfeed.gif";
+
+  eatSound.currentTime = 0;
+  eatSound.play();
 
   setTimeout(() => {
-    pet.src = "images/baby/baby.gif?" + Date.now();
-    pet.style.animation = "";
+    // back to idle
+    pet.src = "images/baby/baby.gif";
+    pet.classList.remove("eating");
     pet.classList.add("wandering");
-  }, 2000);
+  }, 4100); // match your eat gif length
 });
+
