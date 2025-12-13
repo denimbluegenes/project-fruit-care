@@ -33,8 +33,7 @@ body {
 .pet {
   width: 18px;
   height: 15px;
-
-  image-rendering: pixelated;
+  image-rendering: pixelated; 
 
   transform: scale(6) translateY(3px);
   transform-origin: center center;
@@ -58,6 +57,8 @@ body {
   transform: scale(18) translate(3px, 3px); 
   position: center;
 }
+
+
 
 /*hiding statistics from users*/
 .stats {
