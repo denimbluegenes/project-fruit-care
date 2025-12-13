@@ -31,28 +31,25 @@ body {
 
 /*the baby */
 .pet {
-  width: 15px;
-  height: 15px;
-
+  width: 18px;
+  height: 18px;
   image-rendering: pixelated;
 
   transform: scale(6) translateY(3px);
   transform-origin: center center;
 
-  margin: 0;
   position: relative;
-  
+}
+
+/* ONLY wander when this class exists */
+.pet.wandering {
   animation: wanderSteps 9s steps(8) infinite alternate;
 }
 
+/* horizontal movement only */
 @keyframes wanderSteps {
-  0%   { transform: scale(6) translate(-12px, 8px); }
-  100% { transform: scale(6) translate( 12px, 8px); }
-}
-
-/*hiding statistics from users */
-.stats {
-  display: none;
+  from { transform: translateX(-12px); }
+  to   { transform: translateX(12px); }
 }
 
 
