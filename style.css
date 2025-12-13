@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgb(255, 255, 255);
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    
+}
+
+
+.screen {
+    width: 260px;
+    height: 260px;
+    margin: 10px auto 20px;
+    background-color: rgba(194, 211, 180, 0.589);
+    
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    
+}
