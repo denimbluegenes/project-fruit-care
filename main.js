@@ -147,8 +147,6 @@ function endHighLow() {
   }, 300);
 }
 
-
-
 // hook up buttons
 btnPlay.addEventListener("click", () => {
   showGame();
@@ -180,7 +178,4 @@ function showHappyMood(ms = 1400) {
   }, ms);
 }
 
-// upset mood
-const upsetSfx = new Audio("sounds/upset.wav");
-upsetSfx.volume = 0.5;
 
