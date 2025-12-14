@@ -14,6 +14,8 @@ document.querySelectorAll(".controls img").forEach((btn) => {
   btn.addEventListener("click", playButtonSound);
 });
 
+/*starting introo */
+
 
 const pet = document.getElementById("pet");
 const btnEat = document.getElementById("btnEat");
