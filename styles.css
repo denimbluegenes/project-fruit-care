@@ -114,6 +114,36 @@ body {
   background: rgb(179, 183, 201);
 }
 
+#gameView {
+  text-align: center;
+}
+
+#titlecard {
+  position: absolute;
+  top: -10px;              /* distance from top of screen */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+
+  font-family: "Shizuru", cursive;
+  font-size: 18px;
+}
+
+.screen h3 {
+  text-align: center;
+  width: 100%;
+}
+
+.mood {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(6);
+  image-rendering: pixelated;
+}
+
+.hidden { display: none; }
+
 .gamebuttons button,
 #btnExitGame {
   display:block;

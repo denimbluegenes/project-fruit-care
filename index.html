@@ -17,6 +17,7 @@
   <div id="petView">
     <div class="screen" id="screen">
       <img id="pet" class="pet" src="images/baby/baby.gif" alt="My Tama-Fruit" />
+      <img id="mood" class="mood hidden" src="images/baby/babysmile.gif" alt="mood">
     </div>
 
     <div class="stats">
@@ -33,14 +34,20 @@
       <button id="btnPlay" type="button">
         <img src="images/icons/play.png" alt="play" />
       </button>
-    </div>
-  </div>
+    </div><div>
+ <h4>Credits:</h4>
+    <p>Animation and Design by Erilyn Le</p>
+    <p>Audio by Brian Kong</p>
+    <p>Credit to ChatGPT for JS.Script</p>
+</div>
+</div>
 
   <!-- GAME VIEW -->
   <div id="gameView" class="hidden">
-    <h2>High Card or Low Card?</h2>
+    
 
     <div class="screen">
+    <h3 id="titlecard">High Card or Low Card?</h3>
       <div id="currentNum" style="font-size:64px;font-weight:700;">?</div>
     </div>
 
@@ -60,5 +67,7 @@
   </div>
 </div>
   <script src="main.js"></script>
+
+ 
 </body>
 </html>

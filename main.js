@@ -8,6 +8,7 @@ function playButtonSound() {
   buttonSound.play().catch(() => {});
 }
 
+
 /*makes the images makes noise :3 */
 document.querySelectorAll(".controls img").forEach((btn) => {
   btn.addEventListener("click", playButtonSound);
@@ -55,6 +56,10 @@ const winInfo = document.getElementById("winInfo");
 const btnHigher = document.getElementById("btnHigher");
 const btnLower = document.getElementById("btnLower");
 const btnExitGame = document.getElementById("btnExitGame");
+
+btnHigher.addEventListener("click", playButtonSound);
+btnLower.addEventListener("click", playButtonSound);
+btnExitGame.addEventListener("click", playButtonSound);
 
 // hearts earned from game
 let hearts = 0;
@@ -126,15 +131,23 @@ function endHighLow() {
   btnHigher.disabled = true;
   btnLower.disabled = true;
 
-  if (wins >= WIN_TARGET) {
-    hearts = Math.min(MAX_HEARTS, hearts + 1);
-    gameMsg.textContent = `🎉 ${wins}/${MAX_ROUNDS} wins! +1 heart!`;
-  } else {
-    gameMsg.textContent = `😢 ${wins}/${MAX_ROUNDS} wins. No heart.`;
-  }
+  gameMsg.textContent =
+    wins >= WIN_TARGET
+      ? `🎉 ${wins}/${MAX_ROUNDS} wins!`
+      : `😢 ${wins}/${MAX_ROUNDS} wins.`;
 
-  setTimeout(showPet, 1800);
+  // return to pet screen first
+  setTimeout(() => {
+    showPet();
+
+    // ✅ trigger babysmile ONLY if 3–5 wins
+    if (wins >= 3 && wins <= 5) {
+      showHappyMood(1400);
+    }
+  }, 300);
 }
+
+
 
 // hook up buttons
 btnPlay.addEventListener("click", () => {
@@ -145,3 +158,29 @@ btnPlay.addEventListener("click", () => {
 btnHigher.addEventListener("click", () => handleGuess("higher"));
 btnLower.addEventListener("click", () => handleGuess("lower"));
 btnExitGame.addEventListener("click", showPet);
+
+const mood = document.getElementById("mood");
+const happySfx = new Audio("sounds/happy.wav");
+happySfx.volume = 0.6;
+
+function showHappyMood(ms = 1400) {
+  pet.classList.remove("wandering");
+  pet.classList.add("hidden");
+
+  mood.src = "images/baby/babysmile.gif";
+  mood.classList.remove("hidden");
+
+  happySfx.currentTime = 0;
+  happySfx.play().catch(() => {});
+
+  setTimeout(() => {
+    mood.classList.add("hidden");
+    pet.classList.remove("hidden");
+    pet.classList.add("wandering");
+  }, ms);
+}
+
+// upset mood
+const upsetSfx = new Audio("sounds/upset.wav");
+upsetSfx.volume = 0.5;
+
