@@ -20,6 +20,22 @@ const btnEat = document.getElementById("btnEat");
 const eatSound = new Audio("sounds/eating.wav");
 eatSound.volume = 0.4;
 
+const upsetSfx = new Audio("sounds/upset.wav");
+upsetSfx.volume = 0.5;
+
+function showUpsetMood(ms = 1400) {
+  pet.classList.remove("wandering");
+  pet.src = "images/baby/babyupset.gif";
+
+  upsetSfx.currentTime = 0;
+  upsetSfx.play().catch(() => {});
+
+  setTimeout(() => {
+    pet.src = "images/baby/baby.gif";
+    pet.classList.add("wandering");
+  }, ms);
+}
+
 // start wandering
 pet.classList.add("wandering");
 
@@ -131,20 +147,25 @@ function endHighLow() {
   btnHigher.disabled = true;
   btnLower.disabled = true;
 
-  gameMsg.textContent =
-    wins >= WIN_TARGET
-      ? `🎉 ${wins}/${MAX_ROUNDS} wins!`
-      : `😢 ${wins}/${MAX_ROUNDS} wins.`;
+  if (wins >= WIN_TARGET) {
+    hearts = Math.min(MAX_HEARTS, hearts + 1);
+    gameMsg.textContent = `🎉 ${wins}/${MAX_ROUNDS} wins! +1 heart!`;
 
-  // return to pet screen first
-  setTimeout(() => {
-    showPet();
-
-    // ✅ trigger babysmile ONLY if 3–5 wins
-    if (wins >= 3 && wins <= 5) {
+    // (optional) happy happens when you return to pet screen
+    setTimeout(() => {
+      showPet();
       showHappyMood(1400);
-    }
-  }, 300);
+    }, 300);
+
+  } else {
+    gameMsg.textContent = `😢 ${wins}/${MAX_ROUNDS} wins. No heart.`;
+
+    // ✅ return to pet screen, THEN show upset
+    setTimeout(() => {
+      showPet();
+      showUpsetMood(1600);
+    }, 300);
+  }
 }
 
 // hook up buttons
