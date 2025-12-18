@@ -44,7 +44,7 @@ body {
 }
 
 .pet.wandering {
-  animation: wanderSteps 9s steps(8) infinite alternate;
+  animation: wanderSteps 9s steps(20) infinite alternate;
 }
 
 @keyframes wanderSteps {

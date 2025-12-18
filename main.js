@@ -148,6 +148,9 @@ function evolveToFruit() {
   if (fruitEl) {
     fruitEl.src = chosenFruit;
     fruitEl.classList.remove("hidden");
+
+    // ✅ make fruit wander like the baby
+  fruitEl.classList.add("wandering")
   }
 }
 
@@ -344,4 +347,4 @@ btnExitGame.addEventListener("click", showPet);
 /* =========================
    START CARE TIMER ON LOAD
    ========================= */
-startCareTimer(60);
+startCareTimer(5);
