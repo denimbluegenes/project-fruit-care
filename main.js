@@ -8,25 +8,98 @@ function playButtonSound() {
   buttonSound.play().catch(() => {});
 }
 
-
 /*makes the images makes noise :3 */
 document.querySelectorAll(".controls img").forEach((btn) => {
   btn.addEventListener("click", playButtonSound);
 });
 
 /*starting introo */
-
-
 const pet = document.getElementById("pet");
 const btnEat = document.getElementById("btnEat");
+
 const eatSound = new Audio("sounds/eating.wav");
 eatSound.volume = 0.4;
 
 const upsetSfx = new Audio("sounds/upset.wav");
 upsetSfx.volume = 0.5;
 
+const careTimerEl = document.getElementById("careTimer");
+
+function startCareTimer(duration = 30) {
+  if (careTimerStarted) return;
+  careTimerStarted = true;
+
+  let remaining = duration;
+  careTimerEl.textContent = `00:${remaining.toString().padStart(2, "0")}`;
+  careTimerEl.classList.remove("hidden");
+
+  const interval = setInterval(() => {
+    remaining--;
+
+    careTimerEl.textContent = `00:${remaining.toString().padStart(2, "0")}`;
+
+    if (remaining <= 0) {
+      clearInterval(interval);
+      careTimerEl.classList.add("hidden");
+      evolveToFruit();
+    }
+  }, 1000);
+}
+
+
+startCareTimer();
+
+
+
+// ✅ FEED LIMIT
+let feedCount = 0;
+const MAX_FEEDS = 5;
+
+// ===== FRUIT EVOLUTION (30s TEST) =====
+const fruitEl = document.getElementById("fruit"); // make sure you have <img id="fruit" ...> in HTML
+const FRUITS = {
+  apple: "images/fruits/apple.gif",
+  banana: "images/fruits/banana.gif", // rare (best care)
+  cherry: "images/fruits/cherry.gif",
+};
+
+let careScore = 0;
+let careTimerStarted = false;
+
+function startCareTimer() {
+  if (careTimerStarted) return;
+  careTimerStarted = true;
+
+  // 30 seconds test
+  setTimeout(() => {
+    evolveToFruit();
+  }, 30000);
+}
+
+function evolveToFruit() {
+  if (!fruitEl) return; // safety if fruit img isn't in HTML yet
+
+  pet.classList.remove("wandering");
+  pet.classList.remove("eating");
+  pet.classList.add("hidden");
+
+  // clamp
+  careScore = Math.max(0, careScore);
+
+  // thresholds tuned for 30s test
+  // lots of interaction -> banana, some -> cherry, low -> apple
+  let chosen;
+  if (careScore >= 8) chosen = FRUITS.banana;      // 🍌 super good care (rare)
+  else if (careScore >= 4) chosen = FRUITS.cherry; // 🍒 good care
+  else chosen = FRUITS.apple;                      // 🍎 low care
+
+  fruitEl.src = chosen;
+  fruitEl.classList.remove("hidden");
+}
+
 function showUpsetMood(ms = 1400) {
   pet.classList.remove("wandering");
+  pet.classList.remove("eating");
   pet.src = "images/baby/babyupset.gif";
 
   upsetSfx.currentTime = 0;
@@ -41,7 +114,21 @@ function showUpsetMood(ms = 1400) {
 // start wandering
 pet.classList.add("wandering");
 
+// start 30s test timer as soon as the site runs
+startCareTimer();
+
 btnEat.addEventListener("click", () => {
+  // ✅ if full (already fed 5 times) -> upset + sound
+  if (feedCount >= MAX_FEEDS) {
+    showUpsetMood(1600);
+    return;
+  }
+
+  feedCount++;
+
+  // ✅ care scoring: feeding helps a bit
+  careScore += 2;
+
   // stop walking, start eating
   pet.classList.remove("wandering");
   pet.classList.add("eating");
@@ -50,7 +137,7 @@ btnEat.addEventListener("click", () => {
   pet.src = "images/baby/babyfeed.gif";
 
   eatSound.currentTime = 0;
-  eatSound.play();
+  eatSound.play().catch(() => {});
 
   setTimeout(() => {
     // back to idle
@@ -75,6 +162,7 @@ const btnHigher = document.getElementById("btnHigher");
 const btnLower = document.getElementById("btnLower");
 const btnExitGame = document.getElementById("btnExitGame");
 
+// ✅ game buttons also make click noise
 btnHigher.addEventListener("click", playButtonSound);
 btnLower.addEventListener("click", playButtonSound);
 btnExitGame.addEventListener("click", playButtonSound);
@@ -134,7 +222,10 @@ function handleGuess(choice) {
   round++;
   if (win) wins++;
 
-  gameMsg.textContent = win ? `✅ Win! It was ${nextNum}` : `❌ Lose! It was ${nextNum}`;
+  gameMsg.textContent = win
+    ? `✅ Win! It was ${nextNum}`
+    : `❌ Lose! It was ${nextNum}`;
+
   currentNum = nextNum;
   currentNumEl.textContent = currentNum;
 
@@ -153,16 +244,19 @@ function endHighLow() {
     hearts = Math.min(MAX_HEARTS, hearts + 1);
     gameMsg.textContent = `🎉 ${wins}/${MAX_ROUNDS} wins! +1 heart!`;
 
-    // (optional) happy happens when you return to pet screen
+    // ✅ care scoring: winning helps more
+    careScore += 3;
+
     setTimeout(() => {
       showPet();
       showHappyMood(1400);
     }, 300);
-
   } else {
     gameMsg.textContent = `😢 ${wins}/${MAX_ROUNDS} wins. No heart.`;
 
-    // ✅ return to pet screen, THEN show upset
+    // ✅ care scoring: losing hurts a little
+    careScore -= 1;
+
     setTimeout(() => {
       showPet();
       showUpsetMood(1600);
@@ -200,5 +294,4 @@ function showHappyMood(ms = 1400) {
     pet.classList.add("wandering");
   }, ms);
 }
-
 

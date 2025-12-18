@@ -68,6 +68,27 @@ body {
 
 }
 
+.care-timer {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 14px;
+  letter-spacing: 1px;
+
+  color: #4e5747;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 2px 6px;
+  border-radius: 4px;
+
+  font-family: monospace; /* pixel-y feel */
+}
+
+.hidden {
+  display: none;
+}
+
 .gamestats {
     display: none;
   }
