@@ -347,4 +347,4 @@ btnExitGame.addEventListener("click", showPet);
 /* =========================
    START CARE TIMER ON LOAD
    ========================= */
-startCareTimer(5);
+startCareTimer(60);
